@@ -55,10 +55,12 @@
         </LayoutTemplate>
       </Card>
     </Card>
+    <CustomItem ComponentName="customItemDashboardItem1" Name="Hello World Item 1" DataSource="jsonDataSource1" CustomItemType="helloWorldItem" />
   </Items>
   <LayoutTree>
     <LayoutGroup>
-      <LayoutItem DashboardItem="cardDashboardItem1" />
+      <LayoutItem DashboardItem="customItemDashboardItem1" Weight="0.31295981890209396" />
+      <LayoutItem DashboardItem="cardDashboardItem1" Weight="1.687040181097906" />
     </LayoutGroup>
   </LayoutTree>
 </Dashboard>
