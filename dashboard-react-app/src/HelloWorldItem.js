@@ -26,8 +26,7 @@ var helloWorldItemMetaData = {
 };
 
 class HelloWorldItemViewer extends CustomItemViewer {
-    renderContent($element, changeExisting) {
-        var element = $element.jquery ? $element[0] : $element;
+    renderContent(element, changeExisting) {
         element.innerText = this.getPropertyValue('customProperty');
     };
 }
