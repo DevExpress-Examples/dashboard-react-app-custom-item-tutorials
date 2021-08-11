@@ -12,8 +12,7 @@
 
 # Dashboard for React - Custom Item Tutorials
 
-The example contains the source code of the scripts created in this step-by-step tutorials.
-
+The example contains the source code of the scripts created in the step-by-step Custom Item tutorials.
 
 This example uses a client-server architecture. The server (backend) project communicates with the client (frontend) application that includes all the necessary styles, scripts and HTML templates. Note that the script version on the client must match the version of libraries on the server.
 
@@ -71,7 +70,6 @@ npm start
 ```
 
 Open ```http://localhost:3000/``` in your browser to see the result.
-
 
 ## Documentation
 
