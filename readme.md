@@ -79,3 +79,4 @@ Open ```http://localhost:3000/``` in your browser to see the result.
 ## More Examples
 
 - [Dashboard for ASP.NET Core - Custom Item Tutorials](https://github.com/DevExpress-Examples/asp-net-core-dashboard-custom-item-tutorials)
+- [Dashboard for Angular - Custom Properties](https://github.com/DevExpress-Examples/angular-with-asp-net-core-dashboard-custom-properties-sample)
