@@ -39,8 +39,7 @@ var funnelChartItemMetaData = {
 		}]
 	}],
 	icon: 'funnelChartItemIcon',
-	title: 'Funnel Chart',
-	index: 2
+	title: 'Funnel Chart'
 };
 
 class FunnelChartItemViewer extends CustomItemViewer {
