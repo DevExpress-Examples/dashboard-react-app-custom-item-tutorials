@@ -14,7 +14,7 @@ This example uses a client-server architecture. The server (backend) project com
 
 <!-- default file list -->
 
-## Files to Look at
+## Files to Look At
 
 * [HelloWorldItem.js](dashboard-react-app/src/HelloWorldItem.js)
 * [DataAwareItem.js](dashboard-react-app/src/DataAwareItem.js)
