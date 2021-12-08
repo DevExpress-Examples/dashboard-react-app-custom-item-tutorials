@@ -2,6 +2,7 @@ using DevExpress.AspNetCore;
 using DevExpress.DashboardAspNetCore;
 using DevExpress.DashboardCommon;
 using DevExpress.DashboardWeb;
+using DevExpress.DataAccess.Excel;
 using DevExpress.DataAccess.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,14 +34,37 @@ namespace AspNetCoreDashboardBackend {
                 // Adds the DevExpress middleware.
                 .AddDevExpressControls()
                 // Adds controllers.
-                .AddControllers()
-                // Configures the dashboard backend.
-                .AddDefaultDashboardController(configurator => {
-                    configurator.SetDashboardStorage(new DashboardFileStorage(FileProvider.GetFileInfo("App_Data/Dashboards").PhysicalPath));
-                    configurator.SetDataSourceStorage(CreateDataSourceStorage());
-                    configurator.ConfigureDataConnection += Configurator_ConfigureDataConnection;
-                });
-        }
+                .AddControllers();
+            // Configures the dashboard backend.
+            services.AddScoped<DashboardConfigurator>((IServiceProvider serviceProvider) => {
+                DashboardConfigurator configurator = new DashboardConfigurator();
+                configurator.SetConnectionStringsProvider(new DashboardConnectionStringsProvider(Configuration));
+
+                DashboardFileStorage dashboardFileStorage = new DashboardFileStorage(FileProvider.GetFileInfo("App_Data/Dashboards").PhysicalPath);
+                configurator.SetDashboardStorage(dashboardFileStorage);
+
+                DataSourceInMemoryStorage dataSourceStorage = new DataSourceInMemoryStorage();
+
+                // Registers an Object data source.
+                DashboardObjectDataSource objDataSource = new DashboardObjectDataSource("Object Data Source");
+                objDataSource.DataId = "objDataConnection";
+                dataSourceStorage.RegisterDataSource("objDataSource", objDataSource.SaveToXml());
+
+                // Registers an Excel data source.
+                DashboardExcelDataSource excelDataSource = new DashboardExcelDataSource("Excel Data Source");
+                excelDataSource.ConnectionName = "excelDataConnection";
+                excelDataSource.SourceOptions = new ExcelSourceOptions(new ExcelWorksheetSettings("Sheet1"));
+                dataSourceStorage.RegisterDataSource("excelDataSource", excelDataSource.SaveToXml());
+
+                configurator.SetDataSourceStorage(dataSourceStorage);
+                configurator.ConfigureDataConnection += (s, e) => {
+                    if (e.ConnectionName == "excelDataConnection") {
+                        e.ConnectionParameters = new ExcelDataSourceConnectionParameters(FileProvider.GetFileInfo("Data/Sales.xlsx").PhysicalPath);
+                    }
+                };
+                return configurator;
+            });
+            }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             // Registers the DevExpress middleware.            
@@ -55,30 +79,6 @@ namespace AspNetCoreDashboardBackend {
                 // Requires CORS policies.
                 endpoints.MapControllers().RequireCors("CorsPolicy");
             });
-        }
-        public DataSourceInMemoryStorage CreateDataSourceStorage() {
-            DataSourceInMemoryStorage dataSourceStorage = new DataSourceInMemoryStorage();
-            DashboardJsonDataSource jsonDataSourceSupport = new DashboardJsonDataSource("Support");
-            jsonDataSourceSupport.RootElement = "Employee";
-            dataSourceStorage.RegisterDataSource("jsonDataSourceSupport", jsonDataSourceSupport.SaveToXml());
-            DashboardJsonDataSource jsonDataSourceCategories = new DashboardJsonDataSource("Categories");
-            //jsonDataSourceCategories.RootElement = "";
-            dataSourceStorage.RegisterDataSource("jsonDataSourceCategories", jsonDataSourceCategories.SaveToXml());
-            return dataSourceStorage;
-        }
-        private void Configurator_ConfigureDataConnection(object sender, ConfigureDataConnectionWebEventArgs e) {
-            if (e.DataSourceName.Contains("Support")) {
-                Uri fileUri = new Uri(FileProvider.GetFileInfo("App_Data/Support.json").PhysicalPath, UriKind.RelativeOrAbsolute);
-                JsonSourceConnectionParameters jsonParams = new JsonSourceConnectionParameters();
-                jsonParams.JsonSource = new UriJsonSource(fileUri);
-                e.ConnectionParameters = jsonParams;
-            }
-            if (e.DataSourceName.Contains("Categories")) {
-                Uri fileUri = new Uri(FileProvider.GetFileInfo("App_Data/Categories.json").PhysicalPath, UriKind.RelativeOrAbsolute);
-                JsonSourceConnectionParameters jsonParams = new JsonSourceConnectionParameters();
-                jsonParams.JsonSource = new UriJsonSource(fileUri);
-                e.ConnectionParameters = jsonParams;
-            }
         }
     }
 }
