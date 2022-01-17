@@ -62,9 +62,10 @@ namespace AspNetCoreDashboardBackend {
                         e.ConnectionParameters = new ExcelDataSourceConnectionParameters(FileProvider.GetFileInfo("Data/Sales.xlsx").PhysicalPath);
                     }
                 };
+
                 return configurator;
             });
-            }
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             // Registers the DevExpress middleware.            
@@ -75,7 +76,7 @@ namespace AspNetCoreDashboardBackend {
             app.UseCors("CorsPolicy");
             app.UseEndpoints(endpoints => {
                 // Maps the dashboard route.
-                EndpointRouteBuilderExtension.MapDashboardRoute(endpoints, "api/dashboard");
+                EndpointRouteBuilderExtension.MapDashboardRoute(endpoints, "api/dashboard", "DefaultDashboard");
                 // Requires CORS policies.
                 endpoints.MapControllers().RequireCors("CorsPolicy");
             });
