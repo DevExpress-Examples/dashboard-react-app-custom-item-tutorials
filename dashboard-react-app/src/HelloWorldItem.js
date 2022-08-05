@@ -49,7 +49,6 @@ class HelloWorldItem {
         return new HelloWorldItemViewer(model, $element, content);
     }
 }
-// #endregion
-// #region export
+
 export default HelloWorldItem;
 // #endregion 
