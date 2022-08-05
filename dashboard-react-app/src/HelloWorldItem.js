@@ -2,8 +2,10 @@
 import { CustomItemViewer, ResourceManager } from 'devexpress-dashboard/common'
 import { CustomItem } from 'devexpress-dashboard/model'
 // #endregion
-
+// #region svgIcon
 var svgIcon = '<svg id="helloWorldItemIcon" viewBox="0 0 24 24"><path stroke="#42f48f" fill="#42f48f" d="M12 2 L2 22 L22 22 Z" /></svg>';
+// #endregion
+// #region metadata
 var helloWorldItemMetaData = {
     customProperties: [{
         ownerType: CustomItem,
@@ -27,12 +29,15 @@ var helloWorldItemMetaData = {
     icon: 'helloWorldItemIcon',
     title: 'Hello World Item'
 };
-
+// #endregion
+// #region viewer
 class HelloWorldItemViewer extends CustomItemViewer {
     renderContent(element, changeExisting) {
         element.innerText = this.getPropertyValue('customProperty');
     };
 }
+// #endregion
+// #region createItem
 class HelloWorldItem {
     constructor(dashboardControl) {
         ResourceManager.registerIcon(svgIcon);    
@@ -44,5 +49,7 @@ class HelloWorldItem {
         return new HelloWorldItemViewer(model, $element, content);
     }
 }
-
+// #endregion
+// #region export
 export default HelloWorldItem;
+// #endregion 
