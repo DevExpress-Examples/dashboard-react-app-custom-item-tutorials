@@ -1,9 +1,13 @@
-﻿import { Dashboard, CustomItem } from 'devexpress-dashboard/model'
+// #region imports
+import { Dashboard, CustomItem } from 'devexpress-dashboard/model'
 import { CustomItemViewer, ResourceManager } from 'devexpress-dashboard/common'
 import { FormItemTemplates } from 'devexpress-dashboard/designer'
 import dxFunnel from 'devextreme/viz/funnel'
-
+// #endregion
+// #region svgIcon
 var svgIcon = '<svg id="funnelChartItemIcon" viewBox="0 0 24 24"><path stroke="#ffffff" fill="#f442ae" d="M12 2 L2 22 L22 22 Z" /></svg>';
+// #endregion
+// #region metadata
 var funnelChartItemMetaData = {
 	bindings: [{
 		propertyName: 'measureValue',
@@ -41,7 +45,8 @@ var funnelChartItemMetaData = {
 	icon: 'funnelChartItemIcon',
 	title: 'Funnel Chart'
 };
-
+// #endregion
+// #region viewer
 class FunnelChartItemViewer extends CustomItemViewer {
 	constructor(model, $container, options) {		
         super(model, $container, options);
@@ -118,6 +123,8 @@ class FunnelChartItemViewer extends CustomItemViewer {
         }
     }
 }
+// #endregion
+// #region createItem
 class FunnelChartItem {
     constructor(dashboardControl) {
         ResourceManager.registerIcon(svgIcon);
@@ -131,3 +138,4 @@ class FunnelChartItem {
 }
 
 export default FunnelChartItem;
+// #endregion
