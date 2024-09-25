@@ -8,9 +8,9 @@
 
 The example contains the source code of the scripts created in the step-by-step [Custom Item](https://docs.devexpress.com/Dashboard/117546/web-dashboard/ui-elements-and-customization/create-a-custom-item) tutorials.
 
-This example uses a client-server architecture. The server (backend) project communicates with the client (frontend) application that includes all the necessary styles, scripts and HTML templates. Note that the script version on the client must match the version of libraries on the server.
+This example uses a client-server architecture. The server (backend) project communicates with the client (frontend) application and includes all the necessary styles, scripts and HTML templates. Note that the script version on the client must match the version of libraries on the server.
 
-- The [asp-net-core-server](asp-net-core-server) folder contains the backend project built with ASP.NET Core 3.1.
+- The [asp-net-core-server](asp-net-core-server) folder contains the backend project built with .NET 6.
 - The [dashboard-react-app](dashboard-react-app) folder contains the client application built with React.
 
 <!-- default file list -->
@@ -20,7 +20,7 @@ This example uses a client-server architecture. The server (backend) project com
 * [HelloWorldItem.js](dashboard-react-app/src/HelloWorldItem.js)
 * [DataAwareItem.js](dashboard-react-app/src/DataAwareItem.js)
 * [FunnelChartItem.js](dashboard-react-app/src/FunnelChartItem.js)
-* [App.js](dashboard-react-app/src/App.js)
+* [App.](dashboard-react-app/src/App.js)
 
 <!-- default file list end -->
 
