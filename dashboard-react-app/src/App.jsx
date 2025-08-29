@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import DashboardControl from 'devexpress-dashboard-react';
 import {DashboardPanelExtension} from 'devexpress-dashboard/common';
 import HelloWorldItem from './HelloWorldItem';
