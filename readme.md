@@ -10,7 +10,7 @@ The example contains the source code of the scripts created in the step-by-step 
 
 This example uses a client-server architecture. The server (backend) project communicates with the client (frontend) application that includes all the necessary styles, scripts and HTML templates. Note that the script version on the client must match the version of libraries on the server.
 
-- The [asp-net-core-server](asp-net-core-server) folder contains the backend project built with .NET Core 8.
+- The [asp-net-core-server](asp-net-core-server) folder contains the backend project.
 - The [dashboard-react-app](dashboard-react-app) folder contains the client application built with React.
 
 <!-- default file list -->
